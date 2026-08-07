@@ -171,7 +171,7 @@ function openNaverMap(destination, webUrl) {
       </div>
 
       <div class="scroll-guide">
-        <span>SCROLL</span>
+        <span>아래로 내려 초대장을 확인해주세요</span>
         <i></i>
       </div>
     </section>
