@@ -502,6 +502,22 @@ function openNaverMap(destination, webUrl) {
 /* ==========================================
    GLOBAL / MOBILE WEBVIEW
 ========================================== */
+:global(html),
+:global(body) {
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+:global(body) {
+  touch-action: pan-y;
+}
+
+.invitation-page {
+  overflow-anchor: none;
+}
 
 :global(html) {
   width: 100%;
