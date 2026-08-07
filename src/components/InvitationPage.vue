@@ -387,26 +387,9 @@ function openNaverMap(destination, webUrl) {
           </div>
         </div>
 
-        <div class="traffic-item reveal reveal-up reveal-delay-1">
-          <span class="number">
-            02
-          </span>
-
-          <div>
-            <strong>
-              대중교통 이용 시
-            </strong>
-
-            <p>
-              OO역 3번 출구에서 도보 약 5분 거리에
-              위치해 있습니다.
-            </p>
-          </div>
-        </div>
-
         <div class="traffic-item reveal reveal-up reveal-delay-2">
           <span class="number">
-            03
+            02
           </span>
 
           <div>
