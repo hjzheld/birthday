@@ -499,32 +499,15 @@ function openNaverMap(destination, webUrl) {
 </template>
 
 <style scoped>
-/* ==========================================
-   GLOBAL / MOBILE WEBVIEW
-========================================== */
-:global(html),
-:global(body) {
-  overscroll-behavior-x: none;
-  overscroll-behavior-y: none;
-
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-}
-
-:global(body) {
-  touch-action: pan-y;
-}
-
-.invitation-page {
-  overflow-anchor: none;
-}
-
 :global(html) {
   width: 100%;
+  min-height: 100%;
+
   margin: 0;
   padding: 0;
 
   overflow-x: hidden;
+  overflow-y: auto;
 
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -532,10 +515,15 @@ function openNaverMap(destination, webUrl) {
 
 :global(body) {
   width: 100%;
+  min-height: 100%;
+
   margin: 0;
   padding: 0;
 
   overflow-x: hidden;
+  overflow-y: auto;
+
+  -webkit-overflow-scrolling: touch;
 
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
@@ -543,7 +531,7 @@ function openNaverMap(destination, webUrl) {
 
 :global(#app) {
   width: 100%;
-  min-width: 0;
+  min-height: 100%;
 
   overflow-x: hidden;
 }
@@ -554,6 +542,14 @@ function openNaverMap(destination, webUrl) {
 ========================================== */
 
 .invitation-page {
+  width: 100%;
+  min-width: 0;
+  min-height: 100%;
+
+  /* 중요 */
+  overflow-x: hidden;
+  overflow-y: visible;
+
   --navy: #172335;
   --navy-deep: #101a28;
 
