@@ -171,7 +171,7 @@ function openNaverMap(destination, webUrl) {
       </div>
 
       <div class="scroll-guide">
-        <span>SCROLL</span>
+        <span>아래로 내려 초대장을 확인해주세요</span>
         <i></i>
       </div>
     </section>
@@ -516,6 +516,44 @@ function openNaverMap(destination, webUrl) {
 </template>
 
 <style scoped>
+/* ==========================================
+   GLOBAL / MOBILE WEBVIEW
+========================================== */
+
+:global(html) {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+:global(body) {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  overflow-x: hidden;
+
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+:global(#app) {
+  width: 100%;
+  min-width: 0;
+
+  overflow-x: hidden;
+}
+
+
+/* ==========================================
+   PAGE
+========================================== */
+
 .invitation-page {
   --navy: #172335;
   --navy-deep: #101a28;
@@ -529,7 +567,10 @@ function openNaverMap(destination, webUrl) {
   --text: #272725;
   --sub-text: #747068;
 
-  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+
+  overflow-x: hidden;
 
   background: var(--cream);
 
@@ -540,14 +581,25 @@ function openNaverMap(destination, webUrl) {
     "Noto Sans KR",
     sans-serif;
 
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+
   animation: pageFade 1s ease;
 }
 
+
+/* ==========================================
+   공통 SECTION
+========================================== */
+
 .section {
+  width: 100%;
   max-width: 600px;
 
   margin: 0 auto;
   padding: 100px 30px;
+
+  box-sizing: border-box;
 
   text-align: center;
 }
@@ -578,7 +630,10 @@ function openNaverMap(destination, webUrl) {
   line-height: 1.5;
 
   letter-spacing: -0.04em;
+
+  word-break: keep-all;
 }
+
 
 /* ==========================================
    HERO
@@ -592,14 +647,23 @@ function openNaverMap(destination, webUrl) {
   justify-content: center;
 
   width: 100%;
+
+  /*
+    모바일 브라우저 주소창/하단바 변화에
+    레이아웃이 따라 움직이지 않도록
+    작은 viewport 기준 사용
+  */
   height: 100vh;
   height: 100svh;
+
+  min-height: 100vh;
   min-height: 100svh;
+
   box-sizing: border-box;
 
   overflow: hidden;
 
-  padding: clamp(38px, 7svh, 60px) 25px;
+  padding: 42px 25px;
 
   background:
     radial-gradient(
@@ -646,9 +710,12 @@ function openNaverMap(destination, webUrl) {
 
 .hero-border {
   position: absolute;
+
   inset: 18px;
 
   border: 1px solid rgba(173, 136, 80, 0.15);
+
+  pointer-events: none;
 }
 
 .hero-content {
@@ -669,6 +736,11 @@ function openNaverMap(destination, webUrl) {
   color: var(--navy);
 
   font-family: Georgia, serif;
+
+  /*
+    높이 기준 사용 X
+    화면 너비만 기준으로 크기 결정
+  */
   font-size: clamp(80px, 18vw, 120px);
 
   line-height: 1;
@@ -729,6 +801,8 @@ function openNaverMap(destination, webUrl) {
 
 .scroll-guide {
   position: absolute;
+  z-index: 2;
+
   bottom: 28px;
   left: 50%;
 
@@ -765,6 +839,7 @@ function openNaverMap(destination, webUrl) {
   content: "";
 
   position: absolute;
+
   top: -50%;
   left: 0;
 
@@ -775,6 +850,7 @@ function openNaverMap(destination, webUrl) {
 
   animation: scrollMove 1.8s infinite;
 }
+
 
 /* ==========================================
    초대글
@@ -806,6 +882,7 @@ function openNaverMap(destination, webUrl) {
 
   word-break: keep-all;
 }
+
 
 /* ==========================================
    80
@@ -841,6 +918,7 @@ function openNaverMap(destination, webUrl) {
   content: "";
 
   position: absolute;
+
   inset: 8px;
 
   border: 1px solid rgba(214, 189, 142, 0.15);
@@ -880,7 +958,10 @@ function openNaverMap(destination, webUrl) {
 
   font-size: 14px;
   line-height: 2;
+
+  word-break: keep-all;
 }
+
 
 /* ==========================================
    날짜
@@ -940,7 +1021,8 @@ function openNaverMap(destination, webUrl) {
 .calendar-week,
 .calendar-days {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+
+  grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 
 .calendar-week {
@@ -968,6 +1050,7 @@ function openNaverMap(destination, webUrl) {
   justify-content: center;
 
   min-width: 0;
+
   aspect-ratio: 1;
 
   color: #615d56;
@@ -1059,6 +1142,7 @@ function openNaverMap(destination, webUrl) {
   font-size: 20px;
   font-weight: 600;
 }
+
 
 /* ==========================================
    장소
@@ -1152,10 +1236,10 @@ function openNaverMap(destination, webUrl) {
   line-height: 1.8;
 }
 
-
 .map-buttons {
   display: flex;
   flex-direction: column;
+
   gap: 10px;
 
   margin-top: 30px;
@@ -1166,6 +1250,8 @@ function openNaverMap(destination, webUrl) {
   align-items: center;
   justify-content: center;
 
+  width: 100%;
+
   gap: 10px;
 
   margin: 0;
@@ -1173,16 +1259,16 @@ function openNaverMap(destination, webUrl) {
 
   border: 1px solid var(--navy);
 
+  background: transparent;
+
   color: var(--navy);
 
+  font-family: inherit;
   font-size: 13px;
   font-weight: 600;
 
   text-decoration: none;
 
-  width: 100%;
-  background: transparent;
-  font-family: inherit;
   cursor: pointer;
 
   transition: 0.25s;
@@ -1193,6 +1279,7 @@ function openNaverMap(destination, webUrl) {
 
   color: #fff;
 }
+
 
 /* ==========================================
    교통
@@ -1210,7 +1297,8 @@ function openNaverMap(destination, webUrl) {
 
 .traffic-item {
   display: grid;
-  grid-template-columns: 40px 1fr;
+
+  grid-template-columns: 40px minmax(0, 1fr);
 
   gap: 20px;
 
@@ -1253,17 +1341,18 @@ function openNaverMap(destination, webUrl) {
   word-break: keep-all;
 }
 
-
 .parking-address {
   margin-top: 5px !important;
 
   color: #8a8479 !important;
+
   font-size: 12px !important;
 }
 
 .traffic-map-buttons {
   display: flex;
   flex-direction: column;
+
   gap: 8px;
 
   margin-top: 13px;
@@ -1274,22 +1363,24 @@ function openNaverMap(destination, webUrl) {
   align-items: center;
   justify-content: center;
 
+  width: 100%;
   min-width: 112px;
+
   padding: 9px 12px;
 
   border: 1px solid rgba(23, 35, 53, 0.45);
   border-radius: 2px;
 
+  background: transparent;
+
   color: var(--navy);
 
-  width: 100%;
-
+  font-family: inherit;
   font-size: 12px;
   font-weight: 600;
+
   text-decoration: none;
 
-  background: transparent;
-  font-family: inherit;
   cursor: pointer;
 
   transition: 0.2s;
@@ -1297,6 +1388,7 @@ function openNaverMap(destination, webUrl) {
 
 .traffic-map-button:hover {
   background: var(--navy);
+
   color: #fff;
 }
 
@@ -1308,6 +1400,7 @@ function openNaverMap(destination, webUrl) {
 .naver-notice {
   position: fixed;
   z-index: 9999;
+
   inset: 0;
 
   display: flex;
@@ -1317,7 +1410,9 @@ function openNaverMap(destination, webUrl) {
   padding: 24px;
 
   background: rgba(10, 18, 28, 0.55);
+
   backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 
   animation: noticeBackdropIn 0.2s ease;
 }
@@ -1326,6 +1421,8 @@ function openNaverMap(destination, webUrl) {
   width: min(100%, 360px);
 
   padding: 32px 24px 22px;
+
+  box-sizing: border-box;
 
   border: 1px solid rgba(173, 136, 80, 0.25);
   border-radius: 12px;
@@ -1352,6 +1449,7 @@ function openNaverMap(destination, webUrl) {
   border-radius: 50%;
 
   background: #03c75a;
+
   color: #fff;
 
   font-family: Arial, sans-serif;
@@ -1385,7 +1483,9 @@ function openNaverMap(destination, webUrl) {
 
 .naver-notice-actions {
   display: grid;
+
   grid-template-columns: 1fr 1fr;
+
   gap: 8px;
 
   margin-top: 25px;
@@ -1407,6 +1507,7 @@ function openNaverMap(destination, webUrl) {
   border: 1px solid #dedbd4;
 
   background: #fff;
+
   color: #77736b;
 }
 
@@ -1414,30 +1515,10 @@ function openNaverMap(destination, webUrl) {
   border: 1px solid var(--navy);
 
   background: var(--navy);
+
   color: #fff;
 }
 
-@keyframes noticeBackdropIn {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes noticeCardIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px) scale(0.97);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
 
 /* ==========================================
    마지막
@@ -1480,6 +1561,8 @@ function openNaverMap(destination, webUrl) {
 
   font-size: 14px;
   line-height: 2;
+
+  word-break: keep-all;
 }
 
 .closing strong {
@@ -1495,6 +1578,8 @@ function openNaverMap(destination, webUrl) {
 
   font-size: 16px;
   font-weight: 500;
+
+  word-break: keep-all;
 }
 
 .closing-line {
@@ -1527,15 +1612,36 @@ function openNaverMap(destination, webUrl) {
 
 .hero-animate {
   opacity: 0;
+
   transform: translateY(24px);
-  animation: heroReveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+
+  animation:
+    heroReveal
+    0.85s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
 }
 
-.hero-animate--1 { animation-delay: 0.1s; }
-.hero-animate--2 { animation-delay: 0.28s; }
-.hero-animate--3 { animation-delay: 0.5s; }
-.hero-animate--4 { animation-delay: 0.72s; }
-.hero-animate--5 { animation-delay: 0.9s; }
+.hero-animate--1 {
+  animation-delay: 0.1s;
+}
+
+.hero-animate--2 {
+  animation-delay: 0.28s;
+}
+
+.hero-animate--3 {
+  animation-delay: 0.5s;
+}
+
+.hero-animate--4 {
+  animation-delay: 0.72s;
+}
+
+.hero-animate--5 {
+  animation-delay: 0.9s;
+}
+
 
 /* ==========================================
    SCROLL REVEAL ANIMATION
@@ -1543,7 +1649,11 @@ function openNaverMap(destination, webUrl) {
 
 .reveal {
   opacity: 0;
-  will-change: opacity, transform;
+
+  will-change:
+    opacity,
+    transform;
+
   transition:
     opacity 0.75s ease,
     transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1567,12 +1677,25 @@ function openNaverMap(destination, webUrl) {
 
 .reveal.reveal--visible {
   opacity: 1;
-  transform: translateY(0) scale(1);
+
+  transform:
+    translateY(0)
+    scale(1);
 }
 
 .age-circle.reveal--visible {
-  animation: ageBreath 3.8s ease-in-out 0.9s infinite;
+  animation:
+    ageBreath
+    3.8s
+    ease-in-out
+    0.9s
+    infinite;
 }
+
+
+/* ==========================================
+   BUTTON ANIMATION
+========================================== */
 
 .map-button,
 .traffic-map-button {
@@ -1586,6 +1709,7 @@ function openNaverMap(destination, webUrl) {
 .map-button:hover,
 .traffic-map-button:hover {
   transform: translateY(-3px);
+
   box-shadow: 0 10px 24px rgba(23, 35, 53, 0.12);
 }
 
@@ -1594,14 +1718,49 @@ function openNaverMap(destination, webUrl) {
   transform: scale(0.98);
 }
 
+
+/* ==========================================
+   KEYFRAMES
+========================================== */
+
+@keyframes noticeBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes noticeCardIn {
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(15px)
+      scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+}
+
 @keyframes heroReveal {
   from {
     opacity: 0;
+
     transform: translateY(24px);
   }
 
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
 }
@@ -1617,18 +1776,16 @@ function openNaverMap(destination, webUrl) {
   }
 }
 
-/* ==========================================
-   animation
-========================================== */
-
 @keyframes pageFade {
   from {
     opacity: 0;
+
     transform: translateY(10px);
   }
 
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
 }
@@ -1643,8 +1800,9 @@ function openNaverMap(destination, webUrl) {
   }
 }
 
+
 /* ==========================================
-   mobile
+   MOBILE
 ========================================== */
 
 @media (max-width: 600px) {
@@ -1653,28 +1811,64 @@ function openNaverMap(destination, webUrl) {
   }
 
   .hero {
+    width: 100%;
+
     height: 100vh;
     height: 100svh;
+
+    min-height: 100vh;
     min-height: 100svh;
 
     padding:
       max(30px, env(safe-area-inset-top))
       22px
       max(42px, env(safe-area-inset-bottom));
+
+    box-sizing: border-box;
   }
 
   .hero-border {
     inset: 10px;
   }
 
+  .hero-content {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: 30px;
+  }
+
   .hero-hanja {
-    margin-bottom: clamp(12px, 2.5svh, 20px);
+    margin-bottom: 16px;
+
+    /*
+      카카오 상단/하단바는 높이만 변경하므로
+      글자 크기는 width 기준으로 유지
+    */
     font-size: clamp(68px, 20vw, 88px);
   }
 
   .hero h1 {
     font-size: clamp(22px, 6.8vw, 27px);
+
     line-height: 1.55;
+  }
+
+  .divider {
+    margin: 30px 0 22px;
+  }
+
+  .hero-name {
+    font-size: 14px;
+  }
+
+  .scroll-guide {
+    bottom: max(
+      18px,
+      env(safe-area-inset-bottom)
+    );
   }
 
   .greeting-text {
@@ -1709,74 +1903,55 @@ function openNaverMap(destination, webUrl) {
   .age-circle strong {
     font-size: 75px;
   }
-
 }
+
 
 /* ==========================================
-   HERO - 작은 화면 높이 대응
+   TOUCH DEVICE
 ========================================== */
 
-@media (max-width: 600px) and (max-height: 740px) {
-  .hero .eyebrow {
-    margin-bottom: 22px;
+@media (hover: none) {
+  .map-button:hover,
+  .traffic-map-button:hover {
+    background: transparent;
+
+    color: var(--navy);
+
+    transform: none;
+
+    box-shadow: none;
   }
 
-  .hero-hanja {
-    margin-bottom: 10px;
-    font-size: clamp(60px, 17vw, 74px);
-  }
+  .map-button:active,
+  .traffic-map-button:active {
+    background: var(--navy);
 
-  .hero h1 {
-    font-size: clamp(20px, 5.8vw, 24px);
-    line-height: 1.45;
-  }
+    color: #fff;
 
-  .divider {
-    margin: 22px 0 16px;
-  }
-
-  .hero-name {
-    font-size: 13px;
-  }
-
-  .scroll-guide {
-    bottom: max(14px, env(safe-area-inset-bottom));
-  }
-
-  .scroll-guide i {
-    height: 22px;
+    transform: scale(0.98);
   }
 }
 
-@media (max-width: 600px) and (max-height: 620px) {
-  .hero {
-    padding-top: max(18px, env(safe-area-inset-top));
-    padding-bottom: max(32px, env(safe-area-inset-bottom));
+
+/* ==========================================
+   접근성 - 애니메이션 감소
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-animate,
+  .reveal,
+  .age-circle.reveal--visible {
+    animation: none !important;
+
+    transition: none !important;
+
+    opacity: 1 !important;
+
+    transform: none !important;
   }
 
-  .hero .eyebrow {
-    margin-bottom: 14px;
-  }
-
-  .hero-hanja {
-    font-size: 56px;
-  }
-
-  .hero h1 {
-    font-size: 19px;
-    line-height: 1.4;
-  }
-
-  .divider {
-    margin: 16px 0 12px;
-  }
-
-  .scroll-guide span {
-    display: none;
-  }
-
-  .scroll-guide {
-    gap: 0;
+  .scroll-guide i::after {
+    animation: none;
   }
 }
 </style>
