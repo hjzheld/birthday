@@ -631,11 +631,6 @@ function openNaverMap(destination, webUrl) {
 
   width: 100%;
 
-  /*
-    모바일 브라우저 주소창/하단바 변화에
-    레이아웃이 따라 움직이지 않도록
-    작은 viewport 기준 사용
-  */
   height: 100vh;
   height: 100svh;
 
@@ -646,7 +641,11 @@ function openNaverMap(destination, webUrl) {
 
   overflow: hidden;
 
-  padding: 42px 25px;
+  /*
+    하단 안내 문구가 hero-content와
+    겹치지 않도록 아래 공간 확보
+  */
+  padding: 42px 25px 120px;
 
   background:
     radial-gradient(
@@ -707,6 +706,11 @@ function openNaverMap(destination, webUrl) {
 
   width: 100%;
   max-width: 560px;
+
+  /*
+    하단 가이드와 간격 확보
+  */
+  transform: translateY(-15px);
 }
 
 .hero .eyebrow {
@@ -721,8 +725,8 @@ function openNaverMap(destination, webUrl) {
   font-family: Georgia, serif;
 
   /*
-    높이 기준 사용 X
-    화면 너비만 기준으로 크기 결정
+    화면 높이가 아닌 너비 기준
+    카카오 상/하단바 등장 시 크기 변동 방지
   */
   font-size: clamp(80px, 18vw, 120px);
 
@@ -782,36 +786,65 @@ function openNaverMap(destination, webUrl) {
   letter-spacing: 0.03em;
 }
 
+
+/* ==========================================
+   HERO SCROLL GUIDE
+========================================== */
+
 .scroll-guide {
   position: absolute;
-  z-index: 2;
+  z-index: 3;
 
-  bottom: 28px;
+  bottom: 24px;
   left: 50%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  gap: 10px;
+  width: max-content;
+  max-width: calc(100% - 40px);
+
+  gap: 8px;
 
   transform: translateX(-50%);
+
+  text-align: center;
+
+  pointer-events: none;
 }
 
 .scroll-guide span {
+  display: block;
+
   color: #a39987;
 
-  font-family: Georgia, serif;
-  font-size: 8px;
+  font-family:
+    Pretendard,
+    "Noto Sans KR",
+    sans-serif;
 
-  letter-spacing: 0.25em;
+  font-size: 11px;
+  font-weight: 500;
+
+  /*
+    SCROLL용 0.25em 제거
+    한글 안내문구에 맞게 축소
+  */
+  letter-spacing: 0.04em;
+
+  line-height: 1.5;
+
+  white-space: nowrap;
 }
 
 .scroll-guide i {
   position: relative;
 
+  display: block;
+
   width: 1px;
-  height: 30px;
+  height: 28px;
 
   overflow: hidden;
 
@@ -1253,14 +1286,6 @@ function openNaverMap(destination, webUrl) {
   text-decoration: none;
 
   cursor: pointer;
-
-  transition: 0.25s;
-}
-
-.map-button:hover {
-  background: var(--navy);
-
-  color: #fff;
 }
 
 
@@ -1365,14 +1390,6 @@ function openNaverMap(destination, webUrl) {
   text-decoration: none;
 
   cursor: pointer;
-
-  transition: 0.2s;
-}
-
-.traffic-map-button:hover {
-  background: var(--navy);
-
-  color: #fff;
 }
 
 
@@ -1391,6 +1408,8 @@ function openNaverMap(destination, webUrl) {
   justify-content: center;
 
   padding: 24px;
+
+  box-sizing: border-box;
 
   background: rgba(10, 18, 28, 0.55);
 
@@ -1627,7 +1646,7 @@ function openNaverMap(destination, webUrl) {
 
 
 /* ==========================================
-   SCROLL REVEAL ANIMATION
+   SCROLL REVEAL
 ========================================== */
 
 .reveal {
@@ -1691,6 +1710,10 @@ function openNaverMap(destination, webUrl) {
 
 .map-button:hover,
 .traffic-map-button:hover {
+  background: var(--navy);
+
+  color: #fff;
+
   transform: translateY(-3px);
 
   box-shadow: 0 10px 24px rgba(23, 35, 53, 0.12);
@@ -1802,10 +1825,13 @@ function openNaverMap(destination, webUrl) {
     min-height: 100vh;
     min-height: 100svh;
 
+    /*
+      하단 안내 영역 90px 정도 확보
+    */
     padding:
       max(30px, env(safe-area-inset-top))
       22px
-      max(42px, env(safe-area-inset-bottom));
+      max(105px, calc(env(safe-area-inset-bottom) + 90px));
 
     box-sizing: border-box;
   }
@@ -1817,6 +1843,8 @@ function openNaverMap(destination, webUrl) {
   .hero-content {
     width: 100%;
     max-width: 100%;
+
+    transform: translateY(-8px);
   }
 
   .hero .eyebrow {
@@ -1826,10 +1854,6 @@ function openNaverMap(destination, webUrl) {
   .hero-hanja {
     margin-bottom: 16px;
 
-    /*
-      카카오 상단/하단바는 높이만 변경하므로
-      글자 크기는 width 기준으로 유지
-    */
     font-size: clamp(68px, 20vw, 88px);
   }
 
@@ -1849,9 +1873,25 @@ function openNaverMap(destination, webUrl) {
 
   .scroll-guide {
     bottom: max(
-      18px,
+      20px,
       env(safe-area-inset-bottom)
     );
+
+    max-width: calc(100% - 32px);
+  }
+
+  .scroll-guide span {
+    font-size: 10px;
+
+    letter-spacing: 0.02em;
+
+    line-height: 1.4;
+
+    white-space: nowrap;
+  }
+
+  .scroll-guide i {
+    height: 24px;
   }
 
   .greeting-text {
