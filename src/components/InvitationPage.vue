@@ -171,7 +171,7 @@ function openNaverMap(destination, webUrl) {
       </div>
 
       <div class="scroll-guide">
-        <span>아래로 내려 초대장을 확인해주세요</span>
+        <span>아래로 천천히 내려주세요</span>
         <i></i>
       </div>
     </section>
@@ -701,7 +701,8 @@ function openNaverMap(destination, webUrl) {
   color: #a39987;
 
   font-family: Georgia, serif;
-  font-size: 8px;
+  font-size: 12px;
+  font-weight: 700;
 
   letter-spacing: 0.25em;
 }
