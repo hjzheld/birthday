@@ -163,7 +163,7 @@ function openNaverMap(destination, webUrl) {
           <span></span>
           <i>福</i>
           <span></span>
-        </div>
+        </div> 
 
         <p class="hero-name hero-animate hero-animate--5">
           {{ invitation.name }} 님의 팔순잔치
