@@ -163,7 +163,7 @@ function openNaverMap(destination, webUrl) {
           <span></span>
           <i>福</i>
           <span></span>
-        </div> 
+        </div>
 
         <p class="hero-name hero-animate hero-animate--5">
           {{ invitation.name }} 님의 팔순잔치
@@ -171,7 +171,7 @@ function openNaverMap(destination, webUrl) {
       </div>
 
       <div class="scroll-guide">
-        <span>아래로 천천히 내려주세요</span>
+        <span>SCROLL</span>
         <i></i>
       </div>
     </section>
@@ -239,29 +239,73 @@ function openNaverMap(destination, webUrl) {
         소중한 날
       </h2>
 
-      <div class="schedule-card reveal reveal-up reveal-delay-2">
-        <div class="date-box">
-          <span>
-            {{ invitation.month }}
-          </span>
-
-          <strong>
-            {{ invitation.day }}
-          </strong>
-
-          <span>
-            SATURDAY
-          </span>
+      <div class="calendar-card reveal reveal-up reveal-delay-2">
+        <div class="calendar-head">
+          <span>2026</span>
+          <strong>10월</strong>
+          <span>OCTOBER</span>
         </div>
 
-        <div class="date-info">
-          <p>
-            {{ invitation.date }}
-          </p>
+        <div class="calendar-week">
+          <span class="sunday">일</span>
+          <span>월</span>
+          <span>화</span>
+          <span>수</span>
+          <span>목</span>
+          <span>금</span>
+          <span class="saturday">토</span>
+        </div>
 
-          <strong>
-            {{ invitation.time }}
-          </strong>
+        <div class="calendar-days">
+          <span class="empty"></span>
+          <span class="empty"></span>
+          <span class="empty"></span>
+          <span class="empty"></span>
+
+          <span>1</span>
+          <span>2</span>
+
+          <span class="event-day">
+            <strong>3</strong>
+          </span>
+
+          <span class="sunday">4</span>
+          <span>5</span>
+          <span>6</span>
+          <span>7</span>
+          <span>8</span>
+          <span>9</span>
+          <span class="saturday">10</span>
+
+          <span class="sunday">11</span>
+          <span>12</span>
+          <span>13</span>
+          <span>14</span>
+          <span>15</span>
+          <span>16</span>
+          <span class="saturday">17</span>
+
+          <span class="sunday">18</span>
+          <span>19</span>
+          <span>20</span>
+          <span>21</span>
+          <span>22</span>
+          <span>23</span>
+          <span class="saturday">24</span>
+
+          <span class="sunday">25</span>
+          <span>26</span>
+          <span>27</span>
+          <span>28</span>
+          <span>29</span>
+          <span>30</span>
+          <span class="saturday">31</span>
+        </div>
+
+        <div class="calendar-event-info">
+          <p>{{ invitation.date }}</p>
+
+          <strong>{{ invitation.time }}</strong>
         </div>
       </div>
     </section>
@@ -701,8 +745,7 @@ function openNaverMap(destination, webUrl) {
   color: #a39987;
 
   font-family: Georgia, serif;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 8px;
 
   letter-spacing: 0.25em;
 }
@@ -847,7 +890,7 @@ function openNaverMap(destination, webUrl) {
   background: var(--cream);
 }
 
-.schedule-card {
+.calendar-card {
   overflow: hidden;
 
   margin-top: 45px;
@@ -859,50 +902,154 @@ function openNaverMap(destination, webUrl) {
   box-shadow: 0 20px 60px rgba(50, 42, 30, 0.06);
 }
 
-.date-box {
-  padding: 35px 20px;
+.calendar-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
 
-  background: var(--navy);
+  gap: 10px;
+
+  padding: 27px 20px 23px;
+
+  border-bottom: 1px solid #eee8de;
 }
 
-.date-box span {
-  display: block;
-
-  color: rgba(255, 255, 255, 0.5);
+.calendar-head span {
+  color: var(--gold);
 
   font-family: Georgia, serif;
-  font-size: 9px;
+  font-size: 10px;
+  font-weight: 600;
 
-  letter-spacing: 0.28em;
+  letter-spacing: 0.13em;
 }
 
-.date-box strong {
-  display: block;
+.calendar-head strong {
+  color: var(--navy);
 
-  margin: 7px 0;
+  font-family:
+    "Noto Serif KR",
+    serif;
+
+  font-size: 25px;
+  font-weight: 600;
+
+  letter-spacing: -0.04em;
+}
+
+.calendar-week,
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-week {
+  padding: 20px 20px 12px;
+}
+
+.calendar-week span {
+  color: #999187;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  text-align: center;
+}
+
+.calendar-days {
+  row-gap: 7px;
+
+  padding: 0 20px 24px;
+}
+
+.calendar-days > span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 0;
+  aspect-ratio: 1;
+
+  color: #615d56;
+
+  font-family: Georgia, serif;
+  font-size: 13px;
+
+  border-radius: 50%;
+}
+
+.calendar-week .sunday,
+.calendar-days .sunday {
+  color: #b98378;
+}
+
+.calendar-week .saturday,
+.calendar-days .saturday {
+  color: #71849b;
+}
+
+.calendar-days .empty {
+  pointer-events: none;
+}
+
+.calendar-days .event-day {
+  position: relative;
+
+  width: min(42px, 100%);
+
+  margin: auto;
+
+  background: var(--navy);
 
   color: var(--gold-light);
 
-  font-family: Georgia, serif;
-  font-size: 72px;
-  font-weight: 400;
-
-  line-height: 1;
+  box-shadow:
+    0 7px 18px rgba(23, 35, 53, 0.18),
+    inset 0 0 0 1px rgba(214, 189, 142, 0.22);
 }
 
-.date-info {
-  padding: 28px 20px;
+.calendar-days .event-day::after {
+  content: "";
+
+  position: absolute;
+
+  bottom: 5px;
+  left: 50%;
+
+  width: 3px;
+  height: 3px;
+
+  border-radius: 50%;
+
+  background: var(--gold-light);
+
+  transform: translateX(-50%);
 }
 
-.date-info p {
-  margin: 0 0 8px;
+.calendar-days .event-day strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.calendar-event-info {
+  padding: 23px 20px 26px;
+
+  border-top: 1px solid #eee8de;
+
+  background: #fcfaf6;
+
+  text-align: center;
+}
+
+.calendar-event-info p {
+  margin: 0 0 7px;
 
   color: var(--sub-text);
 
-  font-size: 14px;
+  font-size: 13px;
 }
 
-.date-info strong {
+.calendar-event-info strong {
   color: var(--navy);
 
   font-family:
@@ -1532,6 +1679,26 @@ function openNaverMap(destination, webUrl) {
 
   .greeting-text {
     font-size: 14px;
+  }
+
+  .calendar-week {
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .calendar-days {
+    row-gap: 5px;
+
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .calendar-days > span {
+    font-size: 12px;
+  }
+
+  .calendar-days .event-day {
+    width: min(38px, 100%);
   }
 
   .age-circle {

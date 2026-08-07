@@ -4,7 +4,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue';
 const emit = defineEmits(['complete']);
 
 const introText = `소중한 분들을
-공재권님의 고희연에
+공재권님의 산수연에
 초대합니다`;
 
 const displayedText = ref('');
