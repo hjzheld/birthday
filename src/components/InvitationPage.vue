@@ -155,7 +155,7 @@ function openNaverMap(destination, webUrl) {
         </p>
 
         <h1 class="hero-animate hero-animate--3">
-          여든 번째 봄을 맞아<br />
+          여든 번째 가을을 맞아<br />
           소중한 분들을 초대합니다
         </h1>
 
