@@ -17,7 +17,7 @@ const router = createRouter({
     // ==========================================
     {
       path: '/:pathMatch(.*)*',
-      redirect: '/',
+      redirect: '/birthday',
     },
   ],
 })
