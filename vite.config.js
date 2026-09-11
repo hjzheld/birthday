@@ -12,13 +12,13 @@ const githubPagesBase =
 
 export default defineConfig({
   plugins: [vue()],
-  base: '/birthday/',
 
   // 로컬에서는 /
   // GitHub Pages에서는 자동으로 /리포지토리명/
-  base: process.env.GITHUB_ACTIONS === 'true'
-    ? githubPagesBase
-    : '/',
+  base:
+    process.env.GITHUB_ACTIONS === 'true'
+      ? githubPagesBase
+      : '/',
 
   resolve: {
     alias: {
